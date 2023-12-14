@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 
-export default function Home() {
+export default function Home(params: any) {
     const [sliderRef] = useKeenSlider({
         slides: {
             perView: 3,
@@ -17,6 +17,7 @@ export default function Home() {
 
     return (
         <HomeContainer ref={sliderRef} className="keen-slider">
+            <pre>{params.list}</pre>
             <Product className="keen-slider__slide">
                 <Image src={camiseta1} width={520} height={480} alt="" />
 
@@ -54,4 +55,12 @@ export default function Home() {
             </Product>
         </HomeContainer>
     )
+}
+
+export const getServerSideProps = () => {
+    return {
+        props: {
+            list: [1, 2, 3]
+        }
+    }
 }
